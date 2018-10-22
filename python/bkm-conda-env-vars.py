@@ -3,8 +3,6 @@
 
 """
 Will create <path_to_conda_env_/etc/conda/(de-)activate.d/<env_name>_env_vars.bat
-
-Carefull: Currently it only works on windows
 """
 
 import argparse
@@ -40,6 +38,7 @@ def create_env_dirs(path, name):
     :param name: Name of the conda environment.
     :returns: The path to the folder which contains the de-/activate scripts as a string.
     """
+    # TODO 2018-10-22 Add Linux
     if not os.path.split(path)[1] == name:
         path = os.path.join(path, name)
 
