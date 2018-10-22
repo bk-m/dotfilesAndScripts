@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cur_date=$(date +"%Y%m%d")
+emacs -nw ~/notes/$cur_date'_'$1'.org'

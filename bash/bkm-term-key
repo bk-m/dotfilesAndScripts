@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Use Ubuntu settinge to bind Ctrl+ö to this script
+# Make sure to change the name that's being searched in line 12
+# Maybe just use 'windowactivate' instead of 'window(un)map'
+
+file=/tmp/term_window_id
+if [[ -s $file ]] ; then
+    xdotool windowmap `cat $file` && xdotool windowactivate `cat $file`
+    cat /dev/null > $file
+else 
+    # wid=`xdotool search --class terminal windowmap windowsize 1920 1080 windowmove 1920 0`
+    wid=`xdotool search --name bkm@bkm-XPS`
+    xdotool windowunmap $wid
+    echo $wid > $file
+fi
