@@ -69,7 +69,5 @@ def main():
     args = parser.parse_args()
     print(create_env_dirs(get_default_conda_env_path(), args.env_name))
 
-    # TODO 2018-10-22 Print created paths/files
-
 if __name__ == '__main__':
     main()
