@@ -62,11 +62,12 @@ def main():
     Usage: python3 bkm-conda-env-vars.py <name_of_conda_env>
     """
     # TODO 2018-10-22 Add option to run "conda install autopep8 flake8 pyflakes pylint rope"
-    # TODO 2018-10-22 Add option to install CTags
     # TODO 2018-10-22 Add option to install Kivy
+
     parser = argparse.ArgumentParser(description='Create conda env vars files.')
-    conda_env_path = get_default_conda_env_path()
-    print(conda_env_path)
+    parser.add_argument('env_name', type=str, metavar='NAME', help='Name of the conda environment')
+    args = parser.parse_args()
+    print(create_env_dirs(get_default_conda_env_path(), args.env_name))
 
     # TODO 2018-10-22 Print created paths/files
 
