@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -20,6 +20,8 @@ def get_default_conda_env_path():
 
     :returns: Returns either the path as a string or "0" in case no path was found.
     """
+    # TODO 2018-11-04 Offer a selection incase more than 1 env path is found
+    # TODO 2018-11-04 Throw exception incase conda is not installed 
     tmp = subprocess.Popen("conda info", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out = tmp.communicate()[0].decode('utf-8')
     dirs = re.findall("envs directories : (.*)", out)
@@ -38,7 +40,6 @@ def create_env_dirs(path, name):
     :param name: Name of the conda environment.
     :returns: The path to the folder which contains the de-/activate scripts as a string.
     """
-    # TODO 2018-10-22 Add Linux
     if not os.path.split(path)[1] == name:
         path = os.path.join(path, name)
 
@@ -49,6 +50,7 @@ def create_env_dirs(path, name):
     pathlib.Path(activate_path).mkdir(parents=True, exist_ok=True) 
     pathlib.Path(deactivate_path).mkdir(parents=True, exist_ok=True) 
 
+    # TODO 2018-10-22 Add Linux support (i.e. create .sh files instead of .bat)
     with open(os.path.join(activate_path, name + '_env_vars.bat'), 'w') as f:
         f.write("set MY_KEY='secret-key-value'\nset MY_FILE=C:\\path\\to\\my\\file")
 
